@@ -17,6 +17,7 @@ class PostCreate(PostBase):
 class Post(PostBase):
     id: int
     created_at: datetime
+    owner_id: int
 
     class Config:  # From FastAPI documentation - this tells Pydantic model to read data even if it is not a dict
         orm_mode = True
