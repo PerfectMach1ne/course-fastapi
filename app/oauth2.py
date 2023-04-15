@@ -8,6 +8,7 @@ from starlette import status
 
 from . import schemas, models
 from .database import get_db
+from .config import settings
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')  # from auth.py "login" name in the path decorator
 
@@ -15,9 +16,9 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')  # from auth.py "login" n
 # The algorithm
 # The token expiration date
 # Run this in git or bash: openssl rand -hex 32
-SECRET_KEY = "7580d10d73efcfc5f0ef56df5db0ebc3ccbd59b8a6461f5ed0d78b73e0c1558d"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 120
+SECRET_KEY = f'{settings.secret_key}'
+ALGORITHM = f'{settings.algorithm}'
+ACCESS_TOKEN_EXPIRE_MINUTES = int(f'{settings.access_token_expire_minutes}')
 
 
 def create_access_token(data: dict):
