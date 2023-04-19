@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from . import models
 from .database import engine
 from .routers import post, user, vote, auth
@@ -9,6 +11,20 @@ from .routers import post, user, vote, auth
 
 app = FastAPI()  # FastAPI instance to call in uvicorn in order to start a server
 
+# origins = [
+#     "https://www.google.com"
+# ]
+# For public API:
+# origins = ["*"]
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # while True:
 #     try:
