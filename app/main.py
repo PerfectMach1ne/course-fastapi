@@ -3,7 +3,9 @@ from . import models
 from .database import engine
 from .routers import post, user, vote, auth
 
-models.Base.metadata.create_all(bind=engine)
+# Tell SQLAlchemy to run the CREATE statements to generate all the tables when it first starts up
+# Mostly redundant with Alembic
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()  # FastAPI instance to call in uvicorn in order to start a server
 
